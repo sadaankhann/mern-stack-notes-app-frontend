@@ -4,6 +4,8 @@ import { Filenames } from './Homepage'
 
 const Nav = () => {
 
+    const API = import.meta.env.VITE_API_URL
+
     const { changeTheme, setChangeTheme, text, background } = useContext(Filenames);
 
     const [flag, setFlag] = useState('');

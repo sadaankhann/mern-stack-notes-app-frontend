@@ -3,7 +3,7 @@ import { Filenames } from './Homepage';
 
 const InputArea = () => {
 
-    const API = import.meta.process.env.VITE_API_URL
+    const API = import.meta.env.VITE_API_URL
 
     const {filesName, setFilesName, text, background} = useContext(Filenames);
 
