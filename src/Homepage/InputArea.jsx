@@ -3,13 +3,15 @@ import { Filenames } from './Homepage';
 
 const InputArea = () => {
 
+    const API = import.meta.process.env.VITE_API_URL
+
     const {filesName, setFilesName, text, background} = useContext(Filenames);
 
     const [heading, setHeading] = useState("");
     const [paragraph, setParagraph] = useState("");
 
     async function recallingForFileData() {
-        const data = await fetch('http://localhost:3000/getfiles', {
+        const data = await fetch(`${API}/getfiles`, {
             method: 'GET',
             credentials: 'include'
         });
@@ -23,7 +25,7 @@ const InputArea = () => {
 
         e.preventDefault();
 
-        let sendingData = await fetch('http://localhost:3000/inputText', {
+        let sendingData = await fetch(`${API}/inputText`, {
             method: 'POST',
             credentials: 'include',
             headers: { "Content-Type": "application/json" },

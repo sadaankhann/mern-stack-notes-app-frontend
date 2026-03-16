@@ -14,6 +14,9 @@ export const Filenames = createContext({
 });
 
 const Homepage = () => {
+
+    const API = import.meta.process.env.VITE_API_URL
+
     const [filesName, setFilesName] = useState([]);
 
     const [changeTheme, setChangeTheme] = useState(() => {
@@ -33,7 +36,7 @@ const Homepage = () => {
 
     useEffect(() => {
         const checkingIfLoggedIn = async () => {
-            const check = await fetch('http://localhost:3000/user', {
+            const check = await fetch(`${API}/user`, {
                 method: 'GET',
                 credentials: 'include'
             });

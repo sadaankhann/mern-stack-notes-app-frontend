@@ -4,6 +4,8 @@ import { Filenames } from './Homepage';
 
 const Files = () => {
 
+    const API = import.meta.process.env.VITE_API_URL
+
     const { filesName, setFilesName, text, background } = useContext(Filenames);
     const [message, setMessage] = useState('')
     const [showMap, setShowMap] = useState(false);
@@ -18,7 +20,7 @@ const Files = () => {
     }, [])
 
     async function recallingForFileData() {
-        const data = await fetch('http://localhost:3000/getfiles', {
+        const data = await fetch(`${API}/getfiles`, {
             method: 'GET',
             credentials: "include"
         });
@@ -36,7 +38,7 @@ const Files = () => {
     }
 
     const showData = async (filepath) => {
-        const data = await fetch('http://localhost:3000/getfiledata', {
+        const data = await fetch(`${API}/getfiledata`, {
             method: 'POST',
             credentials: "include",
             headers: { 'Content-Type': "application/json" },
@@ -53,7 +55,7 @@ const Files = () => {
     }
 
     const deletingFile = async () => {
-        const deleting = await fetch('http://localhost:3000/deletingfile', {
+        const deleting = await fetch(`${API}/deletingfile`, {
             method: 'POST',
             credentials: "include",
             headers: { 'Content-Type': 'application/json' },
@@ -68,7 +70,7 @@ const Files = () => {
     }
 
     const updatingFileData = async (filename, filedata) => {
-        const sendingData = await fetch('http://localhost:3000/updatingdata', {
+        const sendingData = await fetch(`${API}/updatingdata`, {
             method: 'POST',
             credentials: "include",
             headers: { 'Content-Type': 'application/json' },

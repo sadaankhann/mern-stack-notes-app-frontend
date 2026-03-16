@@ -27,7 +27,7 @@ const Nav = () => {
         }
 
         const gettingDataToShowInProfile = async () => {
-            const data = await fetch('http://localhost:3000/profile', {
+            const data = await fetch(`${API}/profile`, {
                 method: 'GET',
                 credentials: 'include'
             })
