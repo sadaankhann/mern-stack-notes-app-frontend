@@ -17,7 +17,7 @@ const Files = () => {
 
     useEffect(() => {
         recallingForFileData();
-    }, [])
+    }, [filesName])
 
     async function recallingForFileData() {
         const data = await fetch(`${API}/getfiles`, {
