@@ -15,7 +15,7 @@ export const Filenames = createContext({
 
 const Homepage = () => {
 
-    const API = import.meta.env.VITE_API_URL
+    const API = import.meta.env.VITE_API_URL;
 
     const [filesName, setFilesName] = useState([]);
 

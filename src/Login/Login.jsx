@@ -6,6 +6,8 @@ import { Info } from 'lucide-react'
 
 const Login = () => {
 
+    const API = import.meta.env.VITE_API_URL;
+
     const navigate = useNavigate();
 
     const [flag, setFlag] = useState('hidden');
@@ -31,7 +33,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Form data:', formData);
-        const sendingFormData = await fetch('http://localhost:3000/login', {
+        const sendingFormData = await fetch(`${API}/login`, {
             method : 'POST',
             credentials: "include",
             headers : {'Content-Type' : 'application/json'},

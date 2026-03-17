@@ -4,7 +4,9 @@ import { Filenames } from './Homepage'
 
 const Nav = () => {
 
-    const API = import.meta.env.VITE_API_URL
+    const [signOutButtonFlag, setSignOutButtonFlag] = useState(true);
+
+    const API = import.meta.env.VITE_API_URL;
 
     const { changeTheme, setChangeTheme, text, background } = useContext(Filenames);
 
@@ -39,6 +41,19 @@ const Nav = () => {
             console.log(response.name);
         }
 
+        const checkingIfThereAnyUser = async() =>{
+            const data = await fetch(`${API}/user`, {
+                method : 'GET',
+                credentials : 'include'
+            })
+            const response = await data.json();
+            if(response.isLoggedIn){
+                setSignOutButtonFlag(false);
+            }
+        }
+
+        checkingIfThereAnyUser();
+
         gettingDataToShowInProfile();
     }, [])
 
@@ -48,6 +63,21 @@ const Nav = () => {
 
     const handleDoneClick = () => {
         setShowProfile(false)
+    }
+
+    const signingOut = async() =>{
+
+        const data = await fetch(`${API}/signout`, {
+            method : 'GET',
+            credentials : 'include'
+        })
+
+        const response = await data.json();
+        if(response.success){
+            window.location.href = '/login';
+            
+        }
+
     }
 
     return (
@@ -98,8 +128,8 @@ const Nav = () => {
                         </div>
 
                         <div className="flex gap-3">
-                            <button className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg">
-                                Edit
+                            <button className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg" onClick={()=> signingOut()} disabled={signOutButtonFlag}>
+                                Signout
                             </button>
                             <button
                                 onClick={handleDoneClick}

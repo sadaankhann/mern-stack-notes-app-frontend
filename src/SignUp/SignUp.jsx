@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { Info } from 'lucide-react'
 
 const signup = () => {
+
+    const API = import.meta.env.VITE_API_URL;
     
     const navigate = useNavigate();
 
@@ -31,7 +33,7 @@ const signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Form data:', formData);
-        const sendingFormData = await fetch('http://localhost:3000/signup', {
+        const sendingFormData = await fetch(`${API}/signup`, {
             method : 'POST',
             credentials: "include",
             headers : {'Content-Type' : 'application/json'},
